@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/rishabhsvats/go-patterns/go-breeders/models"
+	"github.com/rishabhsvats/go-patterns/go-breeders/configuration"
 )
 
 const PORT = ":3000"
@@ -16,7 +16,7 @@ const PORT = ":3000"
 type application struct {
 	templateMap map[string]*template.Template
 	config      appConfig
-	Models      models.Models
+	App         *configuration.Application
 }
 
 type appConfig struct {
@@ -40,7 +40,7 @@ func main() {
 		log.Panic(err)
 	}
 
-	app.Models = *models.New(db)
+	app.App = configuration.New(db)
 	srv := &http.Server{
 		Addr:              PORT,
 		Handler:           app.routes(),
