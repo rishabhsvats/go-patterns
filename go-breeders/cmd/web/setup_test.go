@@ -4,31 +4,19 @@ import (
 	"os"
 	"testing"
 
+	"github.com/rishabhsvats/go-patterns/go-breeders/adapters"
 	"github.com/rishabhsvats/go-patterns/go-breeders/configuration"
-	"github.com/rishabhsvats/go-patterns/go-breeders/models"
 )
 
 var testApp application
 
 func TestMain(m *testing.M) {
 
-	testBackend := &TestBackend{}
-	testAdapter := &RemoteService{Remote: testBackend}
+	testBackend := &adapters.TestBackend{}
+	testAdapter := &adapters.RemoteService{Remote: testBackend}
 	testApp = application{
-		App:        configuration.New(nil),
-		catService: testAdapter,
+		App: configuration.New(nil, testAdapter),
 	}
 
 	os.Exit(m.Run())
-}
-
-type TestBackend struct {
-}
-
-func (tb *TestBackend) GetAllCatBreeds() ([]*models.CatBreed, error) {
-	breeds := []*models.CatBreed{
-		&models.CatBreed{ID: 1, Breed: "Tomcat", Details: "Details about description of Tomcat"},
-	}
-
-	return breeds, nil
 }
