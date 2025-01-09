@@ -127,3 +127,13 @@ func (app *application) AnimalFromAbstractFactory(w http.ResponseWriter, r *http
 	}
 	_ = t.WriteJSON(w, http.StatusOK, pet)
 }
+
+func (app *application) DogOfMonth(w http.ResponseWriter, r *http.Request) {
+	// Get the breed
+
+	// Get the dog of the month
+
+	// Create the dog and decorate it
+
+	// Serve the web page
+}
