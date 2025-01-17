@@ -1,3 +1,12 @@
+
+# Compress video to make it ready for web format
+
+~~~
+$ go run app/main.go
+~~~
+
+
+# Idea
 videoQueue chan VideoProcessing job
 wp (VideoDispatcher) ---> VideoDispatcher {videoQueue(jobQueue), workerPool}
 videoWorker {new jobQueue, workerpool} 
